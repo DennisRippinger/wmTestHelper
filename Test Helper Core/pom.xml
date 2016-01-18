@@ -42,4 +42,8 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>testHelper</finalName>
+    </build>
+
 </project>
