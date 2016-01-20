@@ -13,20 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper.exception;
+package com.msg.wmTestHelper.metaModel;
+
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.dom4j.Element;
+import org.dom4j.Node;
 
 /**
- * TestHelper specific Runtime exception for various errors along the way.
+ * AbstractExtractor
  *
  * @author Dennis Rippinger
  */
-public class TestHelperException extends RuntimeException {
+@Slf4j
+public abstract class AbstractExtractor {
 
-	public TestHelperException(String message) {
-		super(message);
+	protected String extractStepLabel(Element element) {
+		Node nodeStepLabel = element.selectSingleNode(".//value[name='stepLabel']");
+
+		if (nodeStepLabel != null && StringUtils.isNotEmpty(nodeStepLabel.getText())) {
+			return nodeStepLabel.getText();
+		}
+
+		log.warn("Step label not given for element {}", element.getPath());
+		return StringUtils.EMPTY;
 	}
 
-	public TestHelperException(String message, Throwable cause) {
-		super(message, cause);
-	}
+
 }

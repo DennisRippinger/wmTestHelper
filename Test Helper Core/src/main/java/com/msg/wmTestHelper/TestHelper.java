@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Dennis Rippinger (dennis.rippinger@msg-systems.com)
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@
 package com.msg.wmTestHelper;
 
 import com.msg.wmTestHelper.file.FileSearch;
+import com.msg.wmTestHelper.metaModel.MetaModelCreator;
 import com.msg.wmTestHelper.pojo.GeneratorParameter;
 import com.msg.wmTestHelper.pojo.ProcessFile;
 import lombok.extern.slf4j.Slf4j;
@@ -26,14 +27,13 @@ import java.util.Collection;
  * TestHelper
  *
  * @author Dennis Rippinger
- * @since 18.01.16
  */
 @Slf4j
 public class TestHelper {
 
 	private FileSearch fileSearch = new FileSearch();
 
-
+	private MetaModelCreator metaModelCreator = new MetaModelCreator();
 
 	/**
 	 * Generates a set of classes depending on the WM input files.
@@ -42,5 +42,7 @@ public class TestHelper {
 	 */
 	public void generateTestHelper(GeneratorParameter parameter) {
 		Collection<ProcessFile> processFiles = fileSearch.findLatestFiles(parameter.wmprtPath());
+
+		metaModelCreator.createMetaModel(processFiles);
 	}
 }

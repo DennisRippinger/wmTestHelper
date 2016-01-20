@@ -13,20 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper.exception;
+package com.msg.wmTestHelper.util;
+
+import com.msg.wmTestHelper.exception.TestHelperException;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.io.SAXReader;
+
+import java.io.File;
 
 /**
- * TestHelper specific Runtime exception for various errors along the way.
+ * XmlUtil
  *
  * @author Dennis Rippinger
  */
-public class TestHelperException extends RuntimeException {
+public class XmlUtil {
 
-	public TestHelperException(String message) {
-		super(message);
+	/**
+	 * Parse an XML file via dom4j. Can throw a runtime exception.
+	 *
+	 * @param xmlFile the xml file.
+	 * @return A dom4j document.
+	 */
+	public static Document parse(File xmlFile) {
+		try {
+			SAXReader reader = new SAXReader();
+
+			return reader.read(xmlFile);
+		} catch (DocumentException e) {
+			String reason = String.format("Unable to parse file '%s'", xmlFile.getAbsolutePath());
+			throw new TestHelperException(reason, e);
+		}
+
 	}
 
-	public TestHelperException(String message, Throwable cause) {
-		super(message, cause);
-	}
 }

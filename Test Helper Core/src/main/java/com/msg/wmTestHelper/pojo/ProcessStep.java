@@ -16,6 +16,7 @@
 package com.msg.wmTestHelper.pojo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * ProcessStep
@@ -23,13 +24,13 @@ import lombok.Data;
  * @author Dennis Rippinger
  */
 @Data
+@Accessors(fluent = true, chain = true)
 public class ProcessStep {
 
 	/**
-	 * The model type steps use different class names for each type.
-	 * We map the full qualified name.
+	 * The model type steps.
 	 */
-	private String typeOfClass;
+	private StepType typeOfStep;
 
 	/**
 	 * The label of the processes step 'as is'.

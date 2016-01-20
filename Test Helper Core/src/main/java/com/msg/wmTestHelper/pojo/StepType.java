@@ -13,20 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper.exception;
+package com.msg.wmTestHelper.pojo;
 
 /**
- * TestHelper specific Runtime exception for various errors along the way.
+ * StepType
  *
  * @author Dennis Rippinger
  */
-public class TestHelperException extends RuntimeException {
-
-	public TestHelperException(String message) {
-		super(message);
-	}
-
-	public TestHelperException(String message, Throwable cause) {
-		super(message, cause);
-	}
+public enum StepType {
+	USER_TASK,
+	START_MESSAGE,
+	WAIT_STEP,
+	STEP;
 }
