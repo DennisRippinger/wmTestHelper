@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Dennis Rippinger (dennis.rippinger@msg-systems.com)
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,7 @@ package com.msg.wmTestHelper.file;
 
 import com.msg.wmTestHelper.exception.TestHelperException;
 import com.msg.wmTestHelper.pojo.ProcessFile;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -28,7 +29,7 @@ import java.util.Map;
 public class FileSearch {
 
 
-	public Collection<ProcessFile> findLatestFiles(File directory) {
+	public Collection<ProcessFile> findLatestFiles(@NonNull File directory) {
 
 		if (directory.isDirectory()) {
 			return search(directory);
@@ -37,13 +38,13 @@ public class FileSearch {
 		}
 	}
 
-	public Collection<ProcessFile> findLatestFiles(String directory) {
+	public Collection<ProcessFile> findLatestFiles(@NonNull String directory) {
 		File directoryFile = new File(directory);
 
 		return findLatestFiles(directoryFile);
 	}
 
-	private Collection<ProcessFile> search(File file) {
+	private Collection<ProcessFile> search(@NonNull File file) {
 
 		Map<String, ProcessFile> tempResult = new HashMap<>();
 

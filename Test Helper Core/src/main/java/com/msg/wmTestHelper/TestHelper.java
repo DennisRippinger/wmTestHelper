@@ -19,9 +19,11 @@ import com.msg.wmTestHelper.file.FileSearch;
 import com.msg.wmTestHelper.metaModel.MetaModelCreator;
 import com.msg.wmTestHelper.pojo.GeneratorParameter;
 import com.msg.wmTestHelper.pojo.ProcessFile;
+import com.msg.wmTestHelper.pojo.ProcessModel;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * TestHelper
@@ -43,6 +45,10 @@ public class TestHelper {
 	public void generateTestHelper(GeneratorParameter parameter) {
 		Collection<ProcessFile> processFiles = fileSearch.findLatestFiles(parameter.wmprtPath());
 
-		metaModelCreator.createMetaModel(processFiles);
+		log.info("Found {} relevant process files", processFiles.size());
+
+		List<ProcessModel> metaModels = metaModelCreator.createMetaModel(processFiles);
+		
+		log.info("Created {} meta model entries", metaModels.size());
 	}
 }
