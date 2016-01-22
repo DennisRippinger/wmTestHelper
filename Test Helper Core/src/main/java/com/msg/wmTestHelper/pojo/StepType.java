@@ -24,5 +24,5 @@ public enum StepType {
 	USER_TASK,
 	START_MESSAGE,
 	WAIT_STEP,
-	STEP;
+	SERVICE;
 }

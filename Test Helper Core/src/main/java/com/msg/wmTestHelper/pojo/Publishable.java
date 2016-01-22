@@ -16,6 +16,7 @@
 package com.msg.wmTestHelper.pojo;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * Publishable
@@ -23,6 +24,7 @@ import lombok.Data;
  * @author Dennis Rippinger
  */
 @Data
+@Accessors(fluent = true, chain = true)
 public class Publishable {
 
 	private String documentName;

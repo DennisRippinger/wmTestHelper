@@ -129,3 +129,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+
+/Test Helper Core/src/main/resources/config.properties

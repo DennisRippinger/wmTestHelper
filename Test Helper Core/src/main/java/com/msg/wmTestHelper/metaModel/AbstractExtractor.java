@@ -15,10 +15,14 @@
  */
 package com.msg.wmTestHelper.metaModel;
 
+import com.msg.wmTestHelper.pojo.ProcessStep;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
+
+import java.util.List;
 
 /**
  * AbstractExtractor
@@ -28,15 +32,34 @@ import org.dom4j.Node;
 @Slf4j
 public abstract class AbstractExtractor {
 
-	protected String extractStepLabel(Element element) {
-		Node nodeStepLabel = element.selectSingleNode(".//value[name='stepLabel']");
+	public abstract List<ProcessStep> extractSteps(Document document);
+
+	/**
+	 * Extracts a <code><value></code> element where the attribute name is like elementName.
+	 *
+	 * @param element     the XML element.
+	 * @param elementName the name attribute value.
+	 * @return
+	 */
+	protected String extractPlainValue(Element element, String elementName) {
+		Node nodeStepLabel = element.selectSingleNode(".//value[@name='" + elementName + "']");
 
 		if (nodeStepLabel != null && StringUtils.isNotEmpty(nodeStepLabel.getText())) {
 			return nodeStepLabel.getText();
 		}
 
-		log.warn("Step label not given for element {}", element.getPath());
+		log.warn("Value '{}' not given for element {}", elementName, element.getUniquePath());
 		return StringUtils.EMPTY;
+	}
+
+	/**
+	 * Extract the Step Label value.
+	 *
+	 * @param element the XML element contaning a <code>stepLabel</code>
+	 * @return the string value.
+	 */
+	protected String extractStepLabel(Element element) {
+		return extractPlainValue(element, "stepLabel");
 	}
 
 

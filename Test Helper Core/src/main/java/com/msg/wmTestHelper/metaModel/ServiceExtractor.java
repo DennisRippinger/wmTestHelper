@@ -17,7 +17,6 @@ package com.msg.wmTestHelper.metaModel;
 
 import com.msg.wmTestHelper.pojo.ProcessStep;
 import com.msg.wmTestHelper.pojo.StepType;
-import lombok.NonNull;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
@@ -25,23 +24,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskExtractor
+ * ServiceExtractor
  *
  * @author Dennis Rippinger
  */
-class TaskExtractor extends AbstractExtractor {
+class ServiceExtractor extends AbstractExtractor {
 
-	public List<ProcessStep> extractSteps(@NonNull Document document) {
+	@Override
+	public List<ProcessStep> extractSteps(Document document) {
+		List<Element> services = document.selectNodes("//idatacodable[@javaclass='com.wm.app.prt.model.ServiceTask']");
+		List<ProcessStep> results = new ArrayList<>(services.size());
 
-		List<Element> tasks = document.selectNodes("//idatacodable[@javaclass='com.wm.app.prt.model.UserTask']");
-		List<ProcessStep> results = new ArrayList<>(tasks.size());
-
-		for (Element task : tasks) {
+		for (Element service : services) {
 			ProcessStep processStep = new ProcessStep();
 
 			processStep
-					.stepLabel(extractStepLabel(task))
-					.typeOfStep(StepType.USER_TASK);
+					.stepLabel(extractStepLabel(service))
+					.typeOfStep(StepType.SERVICE);
 
 			results.add(processStep);
 		}
