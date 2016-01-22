@@ -15,15 +15,18 @@
  */
 package com.msg.wmTestHelper.metaModel;
 
+import com.msg.wmTestHelper.exception.TestHelperException;
 import com.msg.wmTestHelper.pojo.ProcessFile;
 import com.msg.wmTestHelper.pojo.ProcessModel;
 import com.msg.wmTestHelper.util.XmlUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.Document;
+import org.reflections.Reflections;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * MetaModelCreator
@@ -33,7 +36,13 @@ import java.util.List;
 @Slf4j
 public class MetaModelCreator {
 
-	private TaskExtractor taskExtractor = new TaskExtractor();
+	private Reflections reflections = new Reflections(getClass().getPackage().getName());
+
+	private List<AbstractExtractor> extractors;
+
+	public MetaModelCreator() {
+		initExtractors();
+	}
 
 	public List<ProcessModel> createMetaModel(Collection<ProcessFile> fileList) {
 
@@ -50,9 +59,26 @@ public class MetaModelCreator {
 		ProcessModel processModel = new ProcessModel(processFile);
 		Document document = XmlUtil.parse(processFile.fileReference());
 
-		processModel
-				.addProcessSteps(taskExtractor.extractSteps(document));
+		for (AbstractExtractor extractor : extractors) {
+			processModel
+					.addProcessSteps(extractor.extractSteps(document));
+		}
 
 		return processModel;
+	}
+
+	private void initExtractors() {
+		Set<Class<? extends AbstractExtractor>> extractorClasses = reflections.getSubTypesOf(AbstractExtractor.class);
+		extractors = new ArrayList<>(extractorClasses.size());
+
+		try {
+			for (Class<? extends AbstractExtractor> extractor : extractorClasses) {
+				extractors.add(extractor.newInstance());
+			}
+
+		} catch (ReflectiveOperationException e) {
+			new TestHelperException("Could not instantiate Extractor class", e);
+		}
+
 	}
 }
