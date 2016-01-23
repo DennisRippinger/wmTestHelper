@@ -48,7 +48,7 @@ public abstract class AbstractExtractor {
 			return nodeStepLabel.getText();
 		}
 
-		log.warn("Value '{}' not given for element {}", elementName, element.getUniquePath());
+		log.warn("Value '{}' not given for element {} {}", elementName, element.getUniquePath(), element.getDocument().getName());
 		return StringUtils.EMPTY;
 	}
 

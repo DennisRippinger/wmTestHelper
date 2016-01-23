@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper
+package com.msg.wmTestHelper.file
 
-import com.msg.wmTestHelper.file.FileSearch
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification

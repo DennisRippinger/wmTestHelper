@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Dennis Rippinger (dennis.rippinger@msg-systems.com)
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,6 +21,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 
 import java.io.File;
+import java.io.InputStream;
 
 /**
  * XmlUtil
@@ -46,5 +47,24 @@ public class XmlUtil {
 		}
 
 	}
+
+	/**
+	 * Parse an XML file via dom4j. Can throw a runtime exception.
+	 *
+	 * @param xmlStream the xml stream.
+	 * @return A dom4j document.
+	 */
+	public static Document parse(InputStream xmlStream) {
+		try {
+			SAXReader reader = new SAXReader();
+
+			return reader.read(xmlStream);
+		} catch (DocumentException e) {
+			String reason = String.format("Unable to parse stream");
+			throw new TestHelperException(reason, e);
+		}
+
+	}
+
 
 }

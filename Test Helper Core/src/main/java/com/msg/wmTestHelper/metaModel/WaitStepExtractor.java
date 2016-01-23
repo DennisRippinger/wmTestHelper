@@ -38,13 +38,14 @@ class WaitStepExtractor extends AbstractExtractor {
 
 	@Override
 	public List<ProcessStep> extractSteps(Document document) {
-		List<Element> possibleWaitSteps = document.selectNodes("//idatacodable[@javaclass='com.wm.app.prt.model.SubprocessStepDef']");
+		List<Element> possibleWaitSteps = document
+				.selectNodes("//idatacodable[@javaclass='com.wm.app.prt.model.SubprocessStepDef']");
 		List<ProcessStep> results = new ArrayList<>(possibleWaitSteps.size());
 
 		for (Element possibleWaitStep : possibleWaitSteps) {
 
-			Element publishedDoc = (Element) possibleWaitStep.selectSingleNode(".//array/idatacodable[@javaclass='com.wm.app.prt.model.PRTPublishedDocOutputDef']");
-
+			Element publishedDoc = (Element) possibleWaitStep
+					.selectSingleNode(".//array/idatacodable[@javaclass='com.wm.app.prt.model.PRTPublishedDocOutputDef']");
 
 			if (isWaitStep(publishedDoc)) {
 				ProcessStep processStep = new ProcessStep();
@@ -69,7 +70,7 @@ class WaitStepExtractor extends AbstractExtractor {
 
 	private boolean isWaitStep(Element publishedDoc) {
 
-		if(publishedDoc == null){
+		if (publishedDoc == null) {
 			return false;
 		}
 
