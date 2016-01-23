@@ -1,43 +1,31 @@
 /**
  * Copyright (C) 2016 Dennis Rippinger (dennis.rippinger@msg-systems.com)
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper.pojo;
+package com.msg.wmTestHelper.codeModel;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
-import org.apache.commons.lang3.StringUtils;
+import com.msg.wmTestHelper.pojo.ProcessModel;
+import com.sun.codemodel.internal.JCodeModel;
+import com.sun.codemodel.internal.JDefinedClass;
 
 /**
- * Contains parameter for the code generator.
+ * AbstractCodeBuilder
  *
  * @author Dennis Rippinger
  */
-@Data
-@Accessors(fluent = true, chain = true)
-public class GeneratorParameter {
+public abstract class AbstractPartCreator {
 
-	private String wmprtPath;
-
-	private String outputPath;
-
-	private String baseNamespace;
-
-	public boolean hasSufficientData() {
-		return StringUtils.isNotEmpty(wmprtPath) //
-				&& outputPath != null //
-				&& StringUtils.isNotEmpty(baseNamespace);
-	}
+	public abstract void buildPart(JCodeModel codeModel, JDefinedClass currentClass, ProcessModel processModel);
 
 }

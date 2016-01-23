@@ -15,6 +15,7 @@
  */
 package com.msg.wmTestHelper;
 
+import com.msg.wmTestHelper.codeModel.CodeModelCreator;
 import com.msg.wmTestHelper.file.FileSearch;
 import com.msg.wmTestHelper.metaModel.MetaModelCreator;
 import com.msg.wmTestHelper.pojo.GeneratorParameter;
@@ -37,6 +38,8 @@ public class TestHelper {
 
 	private MetaModelCreator metaModelCreator = new MetaModelCreator();
 
+	private CodeModelCreator codeModelCreator = new CodeModelCreator();
+
 	/**
 	 * Generates a set of classes depending on the WM input files.
 	 *
@@ -48,7 +51,9 @@ public class TestHelper {
 		log.info("Found {} relevant process files", processFiles.size());
 
 		List<ProcessModel> metaModels = metaModelCreator.createMetaModel(processFiles);
-		
+
 		log.info("Created {} meta model entries", metaModels.size());
+
+		codeModelCreator.createCodeMode(metaModels, parameter);
 	}
 }

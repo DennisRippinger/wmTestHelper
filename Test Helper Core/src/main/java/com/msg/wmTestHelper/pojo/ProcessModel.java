@@ -17,6 +17,7 @@ package com.msg.wmTestHelper.pojo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,19 @@ public class ProcessModel {
 	private int modelVersion;
 
 	private List<ProcessStep> processSteps = new ArrayList<>();
+
+	/**
+	 * Crops the Model name, they are predefined into segments divided by '_'.
+	 *
+	 * @return the technical number name only.
+	 */
+	public String cropModelName() {
+		if (modelName != null) {
+			return modelName.split("_")[0];
+		}
+
+		return StringUtils.EMPTY;
+	}
 
 	/**
 	 * Fluent add method for process steps.
