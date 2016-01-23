@@ -13,32 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper.metaModel
+package com.msg.wmTestHelper.metaModel.extractor
 
 import com.msg.wmTestHelper.util.XmlUtil
 import spock.lang.Specification
 
 /**
- * ServiceExtractorSpec
+ * StartMessageExtractorSpec
  *
  * @author Dennis Rippinger
  */
-class ServiceExtractorSpec extends Specification {
+class WaitStepExtractorSpec extends Specification {
 
-    def "Service conversion to meta model"() {
+    def "Task conversion to meta model"() {
 
         setup: "Init Document and mock ProprietaryHelper"
-
         def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
         assert processTestDocument != null: "Process test file missing"
 
-        ServiceExtractor extractor = new ServiceExtractor()
+        WaitStepExtractor extractor = new WaitStepExtractor()
 
         when: "Create Meta Model"
         def processSteps = extractor.extractSteps(processTestDocument)
 
-        then: "Process Steps are identified"
+        then: "Wait SubProcesses are identified"
         assert processSteps.size().equals(1)
-        assert processSteps.get(0).stepLabel().equals("Service Step")
+        assert processSteps.get(0).stepLabel().equals("Start Message")
     }
 }

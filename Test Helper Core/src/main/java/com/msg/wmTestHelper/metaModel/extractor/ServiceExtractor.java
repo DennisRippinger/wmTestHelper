@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper.metaModel;
+package com.msg.wmTestHelper.metaModel.extractor;
 
+import com.msg.wmTestHelper.metaModel.AbstractExtractor;
 import com.msg.wmTestHelper.pojo.ProcessStep;
 import com.msg.wmTestHelper.pojo.StepType;
 import org.dom4j.Document;

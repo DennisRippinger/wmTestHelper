@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper.metaModel
+package com.msg.wmTestHelper.metaModel.extractor
 
 import com.msg.wmTestHelper.util.XmlUtil
 import spock.lang.Specification

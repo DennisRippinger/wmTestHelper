@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.msg.wmTestHelper.metaModel;
+package com.msg.wmTestHelper.metaModel.extractor;
 
+import com.msg.wmTestHelper.metaModel.AbstractExtractor;
 import com.msg.wmTestHelper.pojo.ProcessStep;
-import com.msg.wmTestHelper.pojo.Publishable;
 import com.msg.wmTestHelper.pojo.StepType;
 import lombok.NonNull;
 import org.dom4j.Document;
@@ -26,41 +26,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * StartMessageExtractor
+ * TaskExtractor
  *
  * @author Dennis Rippinger
  */
-class StartMessageExtractor extends AbstractExtractor {
+class TaskExtractor extends AbstractExtractor {
 
-	@Override
 	public List<ProcessStep> extractSteps(@NonNull Document document) {
 
-		List<Element> startMessages = document.selectNodes("//idatacodable[@javaclass='com.wm.app.prt.model.StartMessageEvent']");
-		List<ProcessStep> results = new ArrayList<>(startMessages.size());
+		List<Element> tasks = document.selectNodes("//idatacodable[@javaclass='com.wm.app.prt.model.UserTask']");
+		List<ProcessStep> results = new ArrayList<>(tasks.size());
 
-		for (Element startMessage : startMessages) {
+		for (Element task : tasks) {
 			ProcessStep processStep = new ProcessStep();
 
 			processStep
-					.stepLabel(extractStepLabel(startMessage))
-					.typeOfStep(StepType.START_MESSAGE)
-					.message(extractStartMessage(startMessage));
+					.stepLabel(extractStepLabel(task))
+					.typeOfStep(StepType.USER_TASK);
 
 			results.add(processStep);
 		}
 
-
 		return results;
-	}
 
-	private Publishable extractStartMessage(Element startMessage) {
-		Publishable result = new Publishable();
-
-		Element elementPublishedDocument = (Element) startMessage.selectSingleNode(".//idatacodable[@javaclass='com.wm.app.prt.model.PRTPublishedDocInputDef']");
-
-		result.documentName(extractPlainValue(elementPublishedDocument, "docName"));
-		result.documentType(extractPlainValue(elementPublishedDocument, "docType"));
-
-		return result;
 	}
 }
