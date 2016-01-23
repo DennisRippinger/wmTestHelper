@@ -30,7 +30,7 @@ import java.util.List;
  *
  * @author Dennis Rippinger
  */
-class TaskExtractor extends AbstractExtractor {
+public class TaskExtractor extends AbstractExtractor {
 
 	public List<ProcessStep> extractSteps(@NonNull Document document) {
 

@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author Dennis Rippinger
  */
-class ServiceExtractor extends AbstractExtractor {
+public class ServiceExtractor extends AbstractExtractor {
 
 	@Override
 	public List<ProcessStep> extractSteps(Document document) {

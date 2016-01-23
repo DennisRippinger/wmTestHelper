@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @author Dennis Rippinger
  */
-class StartMessageExtractor extends AbstractExtractor {
+public class StartMessageExtractor extends AbstractExtractor {
 
 	@Override
 	public List<ProcessStep> extractSteps(@NonNull Document document) {

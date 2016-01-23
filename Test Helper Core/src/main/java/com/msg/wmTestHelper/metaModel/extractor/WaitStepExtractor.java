@@ -34,7 +34,7 @@ import java.util.List;
  * @author Dennis Rippinger
  */
 @Slf4j
-class WaitStepExtractor extends AbstractExtractor {
+public class WaitStepExtractor extends AbstractExtractor {
 
 
 	@Override
