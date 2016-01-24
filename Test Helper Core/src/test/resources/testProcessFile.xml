@@ -23,6 +23,7 @@
         <array>
             <idatacodable javaclass="com.wm.app.prt.model.PRTPublishedDocOutputDef">
                 <value name="docName">Start_Wait</value>
+                <value name="docType">SomedocType</value>
             </idatacodable>
         </array>
     </idatacodable>
