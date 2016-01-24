@@ -111,12 +111,6 @@ build/
 # Ignore Gradle GUI config
 gradle-app.setting
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-/patrolhound/src/main/generated-src/
-
-/patrolhound/src/main/resources/application.properties
 
 ### Maven ###
 target/
