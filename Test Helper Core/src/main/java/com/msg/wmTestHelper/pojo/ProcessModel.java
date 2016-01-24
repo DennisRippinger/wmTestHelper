@@ -17,6 +17,7 @@ package com.msg.wmTestHelper.pojo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
+@Accessors(chain = true, fluent = true)
 public class ProcessModel {
 
 	/**

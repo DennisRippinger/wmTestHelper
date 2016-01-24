@@ -35,7 +35,7 @@ public class TaskPart extends AbstractPartCreator {
 	public void buildPart(JCodeModel codeModel, JDefinedClass currentClass, ProcessModel processModel) {
 
 		processModel
-				.getProcessSteps()
+				.processSteps()
 				.stream()
 				.filter(processStep -> processStep.typeOfStep().equals(StepType.USER_TASK))
 				.forEach(processStep -> createServiceFactory(codeModel, currentClass, processStep, processModel));

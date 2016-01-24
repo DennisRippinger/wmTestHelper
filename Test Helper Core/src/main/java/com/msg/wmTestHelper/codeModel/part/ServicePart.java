@@ -35,7 +35,7 @@ public class ServicePart extends AbstractPartCreator {
 	public void buildPart(JCodeModel codeModel, JDefinedClass currentClass, ProcessModel processModel) {
 
 		processModel
-				.getProcessSteps()
+				.processSteps()
 				.stream()
 				.filter(processStep -> processStep.typeOfStep().equals(StepType.SERVICE))
 				.forEach(processStep -> createServiceFactory(codeModel, currentClass, processStep, processModel));
@@ -45,6 +45,6 @@ public class ServicePart extends AbstractPartCreator {
 		JClass processStepBuilder = codeModel.ref(ProprietaryHelper.getConfig("class.processStepBuilder"));
 
 		JMethod method = currentClass.method(JMod.PUBLIC | JMod.STATIC, processStepBuilder, "createService" + processStep.cropStepLabel());
-		method.body()._return(JExpr._new(processStepBuilder).arg(processStep.stepLabel()).invoke("processModelName").arg(processModel.getModelName()));
+		method.body()._return(JExpr._new(processStepBuilder).arg(processStep.stepLabel()).invoke("processModelName").arg(processModel.modelName()));
 	}
 }

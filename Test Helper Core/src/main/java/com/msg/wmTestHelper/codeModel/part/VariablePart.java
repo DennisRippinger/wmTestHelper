@@ -34,6 +34,6 @@ public class VariablePart extends AbstractPartCreator {
 	@Override
 	public void buildPart(JCodeModel codeModel, JDefinedClass currentClass, ProcessModel processModel) {
 
-		currentClass.field(JMod.PUBLIC | JMod.STATIC | JMod.FINAL, String.class, "PROCESS_NAME", JExpr.lit(processModel.getModelName()));
+		currentClass.field(JMod.PUBLIC | JMod.STATIC | JMod.FINAL, String.class, "PROCESS_NAME", JExpr.lit(processModel.modelName()));
 	}
 }

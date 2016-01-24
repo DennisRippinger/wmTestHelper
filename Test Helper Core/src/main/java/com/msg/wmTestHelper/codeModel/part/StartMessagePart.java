@@ -36,7 +36,7 @@ public class StartMessagePart extends AbstractPartCreator {
 	@Override
 	public void buildPart(JCodeModel codeModel, JDefinedClass currentClass, ProcessModel processModel) {
 
-		Optional<ProcessStep> startMessageStep = processModel.getProcessSteps().stream().filter(processStep -> processStep.typeOfStep().equals(StepType.START_MESSAGE)).findFirst();
+		Optional<ProcessStep> startMessageStep = processModel.processSteps().stream().filter(processStep -> processStep.typeOfStep().equals(StepType.START_MESSAGE)).findFirst();
 		if (startMessageStep.isPresent()) {
 			ProcessStep startMessage = startMessageStep.get();
 
