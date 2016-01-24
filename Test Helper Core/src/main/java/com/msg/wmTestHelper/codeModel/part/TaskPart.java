@@ -17,23 +17,34 @@ package com.msg.wmTestHelper.codeModel.part;
 
 import com.msg.wmTestHelper.codeModel.AbstractPartCreator;
 import com.msg.wmTestHelper.pojo.ProcessModel;
-import com.sun.codemodel.internal.JCodeModel;
-import com.sun.codemodel.internal.JDefinedClass;
-import com.sun.codemodel.internal.JExpr;
-import com.sun.codemodel.internal.JMod;
+import com.msg.wmTestHelper.pojo.ProcessStep;
+import com.msg.wmTestHelper.pojo.StepType;
+import com.msg.wmTestHelper.util.ProprietaryHelper;
+import com.sun.codemodel.internal.*;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * VariablePart
+ * TaskPart
  *
  * @author Dennis Rippinger
  */
 @Slf4j
-public class VariablePart extends AbstractPartCreator {
+public class TaskPart extends AbstractPartCreator {
 
 	@Override
 	public void buildPart(JCodeModel codeModel, JDefinedClass currentClass, ProcessModel processModel) {
 
-		currentClass.field(JMod.PUBLIC | JMod.STATIC | JMod.FINAL, String.class, "PROCESS_NAME", JExpr.lit(processModel.getModelName()));
+		processModel
+				.getProcessSteps()
+				.stream()
+				.filter(processStep -> processStep.typeOfStep().equals(StepType.USER_TASK))
+				.forEach(processStep -> createServiceFactory(codeModel, currentClass, processStep, processModel));
+	}
+
+	private void createServiceFactory(JCodeModel codeModel, JDefinedClass currentClass, ProcessStep processStep, ProcessModel processModel) {
+		JClass processStepBuilder = codeModel.ref(ProprietaryHelper.getConfig("class.processStepTask"));
+
+		JMethod method = currentClass.method(JMod.PUBLIC | JMod.STATIC, processStepBuilder, "createTask" + processStep.cropStepLabel());
+		method.body()._return(JExpr._new(processStepBuilder).arg(processStep.cropStepLabel()));
 	}
 }

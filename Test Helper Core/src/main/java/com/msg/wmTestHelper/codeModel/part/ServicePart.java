@@ -23,27 +23,28 @@ import com.msg.wmTestHelper.util.ProprietaryHelper;
 import com.sun.codemodel.internal.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Optional;
-
 /**
- * StartMessagePart
+ * ServicePart
  *
  * @author Dennis Rippinger
  */
 @Slf4j
-public class StartMessagePart extends AbstractPartCreator {
+public class ServicePart extends AbstractPartCreator {
 
 	@Override
 	public void buildPart(JCodeModel codeModel, JDefinedClass currentClass, ProcessModel processModel) {
 
-		Optional<ProcessStep> startMessageStep = processModel.getProcessSteps().stream().filter(processStep -> processStep.typeOfStep().equals(StepType.START_MESSAGE)).findFirst();
-		if (startMessageStep.isPresent()) {
-			ProcessStep startMessage = startMessageStep.get();
+		processModel
+				.getProcessSteps()
+				.stream()
+				.filter(processStep -> processStep.typeOfStep().equals(StepType.SERVICE))
+				.forEach(processStep -> createServiceFactory(codeModel, currentClass, processStep, processModel));
+	}
 
-			JClass processMessageBuilder = codeModel.ref(ProprietaryHelper.getConfig("class.processMessageBuilder"));
+	private void createServiceFactory(JCodeModel codeModel, JDefinedClass currentClass, ProcessStep processStep, ProcessModel processModel) {
+		JClass processStepBuilder = codeModel.ref(ProprietaryHelper.getConfig("class.processStepBuilder"));
 
-			JMethod method = currentClass.method(JMod.PUBLIC | JMod.STATIC, processMessageBuilder, "createStartMessage");
-			method.body()._return(JExpr._new(processMessageBuilder).arg(startMessage.message().documentType()));
-		}
+		JMethod method = currentClass.method(JMod.PUBLIC | JMod.STATIC, processStepBuilder, "createService" + processStep.cropStepLabel());
+		method.body()._return(JExpr._new(processStepBuilder).arg(processStep.stepLabel()).invoke("processModelName").arg(processModel.getModelName()));
 	}
 }

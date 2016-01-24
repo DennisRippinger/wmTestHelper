@@ -17,6 +17,7 @@ package com.msg.wmTestHelper.pojo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * ProcessStep
@@ -47,5 +48,16 @@ public class ProcessStep {
 	 */
 	public boolean isPublishable() {
 		return message != null;
+	}
+
+	/**
+	 * @return the first literal of the step name, per definition the technical name.
+	 */
+	public String cropStepLabel() {
+		if (StringUtils.isNotEmpty(stepLabel)) {
+			return stepLabel.split(" ")[0];
+		}
+
+		return StringUtils.EMPTY;
 	}
 }

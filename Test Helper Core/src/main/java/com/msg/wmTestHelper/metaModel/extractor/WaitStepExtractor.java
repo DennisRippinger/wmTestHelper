@@ -17,6 +17,7 @@ package com.msg.wmTestHelper.metaModel.extractor;
 
 import com.msg.wmTestHelper.metaModel.AbstractExtractor;
 import com.msg.wmTestHelper.pojo.ProcessStep;
+import com.msg.wmTestHelper.pojo.Publishable;
 import com.msg.wmTestHelper.pojo.StepType;
 import com.msg.wmTestHelper.util.ProprietaryHelper;
 import lombok.NonNull;
@@ -53,6 +54,7 @@ public class WaitStepExtractor extends AbstractExtractor {
 
 				processStep
 						.stepLabel(extractWaitStepLabel(possibleWaitStep))
+						.message(extractStartMessage(possibleWaitStep))
 						.typeOfStep(StepType.WAIT_STEP);
 
 				results.add(processStep);
@@ -61,6 +63,17 @@ public class WaitStepExtractor extends AbstractExtractor {
 		}
 
 		return results;
+	}
+
+	private Publishable extractStartMessage(Element startMessage) {
+		Publishable result = new Publishable();
+
+		Element elementPublishedDocument = (Element) startMessage.selectSingleNode(".//idatacodable[@javaclass='com.wm.app.prt.model.PRTPublishedDocOutputDef']");
+
+		result.documentName(extractPlainValue(elementPublishedDocument, "docName"));
+		result.documentType(extractPlainValue(elementPublishedDocument, "docType"));
+
+		return result;
 	}
 
 	private String extractWaitStepLabel(@NonNull Element possibleWaitStep) {
@@ -76,10 +89,13 @@ public class WaitStepExtractor extends AbstractExtractor {
 		}
 
 		String docName = extractPlainValue(publishedDoc, "docName");
-		String possibleWaitProcessName = ProprietaryHelper.getConfig("waitProcessName");
 
-		log.debug("SubProcess Call found to '{}'", possibleWaitProcessName);
+		log.info(docName);
 
-		return StringUtils.isNotEmpty(docName) && StringUtils.equals(possibleWaitProcessName, docName);
+		return StringUtils.isNotEmpty(docName) && (
+				StringUtils.equals(ProprietaryHelper.getConfig("wait.1.startmessage"), docName) ||
+				StringUtils.equals(ProprietaryHelper.getConfig("wait.2.startmessage"), docName) ||
+				StringUtils.equals(ProprietaryHelper.getConfig("wait.3.startmessage"), docName)
+		);
 	}
 }
