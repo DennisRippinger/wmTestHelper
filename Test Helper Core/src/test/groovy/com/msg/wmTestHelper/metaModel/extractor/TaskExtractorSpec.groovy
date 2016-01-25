@@ -25,20 +25,20 @@ import spock.lang.Specification
  */
 class TaskExtractorSpec extends Specification {
 
-    def "Task conversion to meta model"() {
+	def "Task conversion to meta model"() {
 
-        setup: "Init Document and mock ProprietaryHelper"
+		setup: "Init Document and mock ProprietaryHelper"
 
-        def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
-        assert processTestDocument != null: "Process test file missing"
+		def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
+		assert processTestDocument != null: "Process test file missing"
 
-        TaskExtractor extractor = new TaskExtractor()
+		TaskExtractor extractor = new TaskExtractor()
 
-        when: "Create Meta Model"
-        def processSteps = extractor.extractSteps(processTestDocument)
+		when: "Create Meta Model"
+		def processSteps = extractor.extractSteps(processTestDocument)
 
-        then: "Process Tasks are identified"
-        assert processSteps.size().equals(1)
-        assert processSteps.get(0).stepLabel().equals("User Task")
-    }
+		then: "Process Tasks are identified"
+		assert processSteps.size().equals(1)
+		assert processSteps.get(0).stepLabel().equals("User Task")
+	}
 }

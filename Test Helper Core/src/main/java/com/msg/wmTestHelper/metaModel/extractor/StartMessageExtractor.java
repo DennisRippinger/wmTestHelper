@@ -43,9 +43,9 @@ public class StartMessageExtractor extends AbstractExtractor {
 			ProcessStep processStep = new ProcessStep();
 
 			processStep
-					.stepLabel(extractStepLabel(startMessage))
-					.typeOfStep(StepType.START_MESSAGE)
-					.message(extractStartMessage(startMessage));
+				.stepLabel(extractStepLabel(startMessage))
+				.typeOfStep(StepType.START_MESSAGE)
+				.message(extractStartMessage(startMessage));
 
 			results.add(processStep);
 		}

@@ -41,9 +41,9 @@ public class CreateFactoriesMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException, MojoFailureException {
 
 		GeneratorParameter parameter = new GeneratorParameter()
-				.wmprtPath(wmprtPath)
-				.outputPath(outputPath)
-				.baseNamespace(baseNamespace);
+			.wmprtPath(wmprtPath)
+			.outputPath(outputPath)
+			.baseNamespace(baseNamespace);
 
 		TestHelper testHelper = new TestHelper();
 		testHelper.generateTestHelper(parameter);

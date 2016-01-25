@@ -25,19 +25,19 @@ import spock.lang.Specification
  */
 class WaitStepExtractorSpec extends Specification {
 
-    def "Task conversion to meta model"() {
+	def "Task conversion to meta model"() {
 
-        setup: "Init Document and mock ProprietaryHelper"
-        def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
-        assert processTestDocument != null: "Process test file missing"
+		setup: "Init Document and mock ProprietaryHelper"
+		def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
+		assert processTestDocument != null: "Process test file missing"
 
-        WaitStepExtractor extractor = new WaitStepExtractor()
+		WaitStepExtractor extractor = new WaitStepExtractor()
 
-        when: "Create Meta Model"
-        def processSteps = extractor.extractSteps(processTestDocument)
+		when: "Create Meta Model"
+		def processSteps = extractor.extractSteps(processTestDocument)
 
-        then: "Wait SubProcesses are identified"
-        assert processSteps.size().equals(1)
-        assert processSteps.get(0).stepLabel().equals("Start Message")
-    }
+		then: "Wait SubProcesses are identified"
+		assert processSteps.size().equals(1)
+		assert processSteps.get(0).stepLabel().equals("Start Message")
+	}
 }

@@ -41,8 +41,8 @@ public class TaskExtractor extends AbstractExtractor {
 			ProcessStep processStep = new ProcessStep();
 
 			processStep
-					.stepLabel(extractStepLabel(task))
-					.typeOfStep(StepType.USER_TASK);
+				.stepLabel(extractStepLabel(task))
+				.typeOfStep(StepType.USER_TASK);
 
 			results.add(processStep);
 		}

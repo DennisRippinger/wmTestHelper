@@ -2,38 +2,38 @@
 
 <IDataDemo version="1.0">
 
-    <idatacodable javaclass="com.wm.app.prt.model.ServiceTask">
-        <value name="stepLabel">Service Step</value>
-    </idatacodable>
+	<idatacodable javaclass="com.wm.app.prt.model.ServiceTask">
+		<value name="stepLabel">Service Step</value>
+	</idatacodable>
 
-    <idatacodable javaclass="com.wm.app.prt.model.StartMessageEvent">
-        <value name="stepLabel">Start Message</value>
-        <idatacodable javaclass="com.wm.app.prt.model.PRTPublishedDocInputDef">
-            <value name="docName">Message Name</value>
-            <value name="docType">Message Type</value>
-        </idatacodable>
-    </idatacodable>
+	<idatacodable javaclass="com.wm.app.prt.model.StartMessageEvent">
+		<value name="stepLabel">Start Message</value>
+		<idatacodable javaclass="com.wm.app.prt.model.PRTPublishedDocInputDef">
+			<value name="docName">Message Name</value>
+			<value name="docType">Message Type</value>
+		</idatacodable>
+	</idatacodable>
 
-    <idatacodable javaclass="com.wm.app.prt.model.UserTask">
-        <value name="stepLabel">User Task</value>
-    </idatacodable>
+	<idatacodable javaclass="com.wm.app.prt.model.UserTask">
+		<value name="stepLabel">User Task</value>
+	</idatacodable>
 
-    <idatacodable javaclass="com.wm.app.prt.model.SubprocessStepDef">
-        <value name="stepLabel">PRESUB_Start Message</value>
-        <array>
-            <idatacodable javaclass="com.wm.app.prt.model.PRTPublishedDocOutputDef">
-                <value name="docName">Start_Wait</value>
-                <value name="docType">SomedocType</value>
-            </idatacodable>
-        </array>
-    </idatacodable>
+	<idatacodable javaclass="com.wm.app.prt.model.SubprocessStepDef">
+		<value name="stepLabel">PRESUB_Start Message</value>
+		<array>
+			<idatacodable javaclass="com.wm.app.prt.model.PRTPublishedDocOutputDef">
+				<value name="docName">Start_Wait</value>
+				<value name="docType">SomedocType</value>
+			</idatacodable>
+		</array>
+	</idatacodable>
 
-    <idatacodable javaclass="com.wm.app.prt.model.SubprocessStepDef">
-        <value name="docName">PRESUB_Something_Else</value>
-        <value name="stepLabel">Start Message</value>
-        <idatacodable javaclass="com.wm.app.prt.model.PRTPublishedDocOutputDef">
-            <value name="docName">Send_Stuff</value>
-        </idatacodable>
-    </idatacodable>
+	<idatacodable javaclass="com.wm.app.prt.model.SubprocessStepDef">
+		<value name="docName">PRESUB_Something_Else</value>
+		<value name="stepLabel">Start Message</value>
+		<idatacodable javaclass="com.wm.app.prt.model.PRTPublishedDocOutputDef">
+			<value name="docName">Send_Stuff</value>
+		</idatacodable>
+	</idatacodable>
 
 </IDataDemo>

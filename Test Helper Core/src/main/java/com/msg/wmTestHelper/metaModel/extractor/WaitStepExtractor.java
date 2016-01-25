@@ -41,21 +41,21 @@ public class WaitStepExtractor extends AbstractExtractor {
 	@Override
 	public List<ProcessStep> extractSteps(Document document) {
 		List<Element> possibleWaitSteps = document
-				.selectNodes("//idatacodable[@javaclass='com.wm.app.prt.model.SubprocessStepDef']");
+			.selectNodes("//idatacodable[@javaclass='com.wm.app.prt.model.SubprocessStepDef']");
 		List<ProcessStep> results = new ArrayList<>(possibleWaitSteps.size());
 
 		for (Element possibleWaitStep : possibleWaitSteps) {
 
 			Element publishedDoc = (Element) possibleWaitStep
-					.selectSingleNode(".//array/idatacodable[@javaclass='com.wm.app.prt.model.PRTPublishedDocOutputDef']");
+				.selectSingleNode(".//array/idatacodable[@javaclass='com.wm.app.prt.model.PRTPublishedDocOutputDef']");
 
 			if (isWaitStep(publishedDoc)) {
 				ProcessStep processStep = new ProcessStep();
 
 				processStep
-						.stepLabel(extractWaitStepLabel(possibleWaitStep))
-						.message(extractStartMessage(possibleWaitStep))
-						.typeOfStep(StepType.WAIT_STEP);
+					.stepLabel(extractWaitStepLabel(possibleWaitStep))
+					.message(extractStartMessage(possibleWaitStep))
+					.typeOfStep(StepType.WAIT_STEP);
 
 				results.add(processStep);
 			}
@@ -93,7 +93,7 @@ public class WaitStepExtractor extends AbstractExtractor {
 		log.info(docName);
 
 		return StringUtils.isNotEmpty(docName) && (
-				StringUtils.equals(ProprietaryHelper.getConfig("wait.1.startmessage"), docName) ||
+			StringUtils.equals(ProprietaryHelper.getConfig("wait.1.startmessage"), docName) ||
 				StringUtils.equals(ProprietaryHelper.getConfig("wait.2.startmessage"), docName) ||
 				StringUtils.equals(ProprietaryHelper.getConfig("wait.3.startmessage"), docName)
 		);

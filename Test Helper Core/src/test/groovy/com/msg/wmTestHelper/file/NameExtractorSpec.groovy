@@ -24,32 +24,32 @@ import spock.lang.Specification
  */
 class NameExtractorSpec extends Specification {
 
-    def "Name Extraction normal examples"() {
+	def "Name Extraction normal examples"() {
 
-        expect:
-        def processFile = NameExtractor.extractProcessFile(file);
-        processFile.name().equals(name)
-        processFile.version() == version
-        processFile.fileReference().equals(file)
+		expect:
+		def processFile = NameExtractor.extractProcessFile(file);
+		processFile.name().equals(name)
+		processFile.version() == version
+		processFile.fileReference().equals(file)
 
-        where:
-        file                                | version | name
-        new File("/A.B.C2.Default.xml")     | 2       | "B"
-        new File("/A.Hello.C3.Default.xml") | 3       | "Hello"
+		where:
+		file                                | version | name
+		new File("/A.B.C2.Default.xml")     | 2       | "B"
+		new File("/A.Hello.C3.Default.xml") | 3       | "Hello"
 
-    }
+	}
 
-    def "Wrong filename provided"() {
+	def "Wrong filename provided"() {
 
-        setup: "Read in a wrong file"
-        def wrongFile = new File("/A.xml")
+		setup: "Read in a wrong file"
+		def wrongFile = new File("/A.xml")
 
-        when: "Name extractor is called"
-        NameExtractor.extractProcessFile(wrongFile)
+		when: "Name extractor is called"
+		NameExtractor.extractProcessFile(wrongFile)
 
-        then: "Exception is thrown"
-        thrown(IndexOutOfBoundsException)
+		then: "Exception is thrown"
+		thrown(IndexOutOfBoundsException)
 
-    }
+	}
 
 }

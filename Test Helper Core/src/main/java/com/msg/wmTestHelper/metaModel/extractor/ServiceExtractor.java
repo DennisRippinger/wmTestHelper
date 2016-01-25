@@ -40,8 +40,8 @@ public class ServiceExtractor extends AbstractExtractor {
 			ProcessStep processStep = new ProcessStep();
 
 			processStep
-					.stepLabel(extractStepLabel(service))
-					.typeOfStep(StepType.SERVICE);
+				.stepLabel(extractStepLabel(service))
+				.typeOfStep(StepType.SERVICE);
 
 			results.add(processStep);
 		}

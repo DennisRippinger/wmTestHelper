@@ -36,8 +36,8 @@ public class GeneratorParameter {
 
 	public boolean hasSufficientData() {
 		return StringUtils.isNotEmpty(wmprtPath) //
-				&& outputPath != null //
-				&& StringUtils.isNotEmpty(baseNamespace);
+			&& outputPath != null //
+			&& StringUtils.isNotEmpty(baseNamespace);
 	}
 
 }

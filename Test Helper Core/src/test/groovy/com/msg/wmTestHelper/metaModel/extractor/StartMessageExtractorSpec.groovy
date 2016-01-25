@@ -25,21 +25,21 @@ import spock.lang.Specification
  */
 class StartMessageExtractorSpec extends Specification {
 
-    def "Task conversion to meta model"() {
+	def "Task conversion to meta model"() {
 
-        setup: "Init Document and mock ProprietaryHelper"
-        def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
-        assert processTestDocument != null: "Process test file missing"
+		setup: "Init Document and mock ProprietaryHelper"
+		def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
+		assert processTestDocument != null: "Process test file missing"
 
-        StartMessageExtractor extractor = new StartMessageExtractor()
+		StartMessageExtractor extractor = new StartMessageExtractor()
 
-        when: "Create Meta Model"
-        def processSteps = extractor.extractSteps(processTestDocument)
+		when: "Create Meta Model"
+		def processSteps = extractor.extractSteps(processTestDocument)
 
-        then: "Process Tasks are identified"
-        assert processSteps.size().equals(1)
-        assert processSteps.get(0).stepLabel().equals("Start Message")
-        assert processSteps.get(0).message().documentName().equals("Message Name")
-        assert processSteps.get(0).message().documentType().equals("Message Type")
-    }
+		then: "Process Tasks are identified"
+		assert processSteps.size().equals(1)
+		assert processSteps.get(0).stepLabel().equals("Start Message")
+		assert processSteps.get(0).message().documentName().equals("Message Name")
+		assert processSteps.get(0).message().documentType().equals("Message Type")
+	}
 }

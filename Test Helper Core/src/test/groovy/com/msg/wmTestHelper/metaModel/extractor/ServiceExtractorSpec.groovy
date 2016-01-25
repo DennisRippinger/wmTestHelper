@@ -25,20 +25,20 @@ import spock.lang.Specification
  */
 class ServiceExtractorSpec extends Specification {
 
-    def "Service conversion to meta model"() {
+	def "Service conversion to meta model"() {
 
-        setup: "Init Document and mock ProprietaryHelper"
+		setup: "Init Document and mock ProprietaryHelper"
 
-        def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
-        assert processTestDocument != null: "Process test file missing"
+		def processTestDocument = XmlUtil.parse(this.getClass().getResourceAsStream("/testProcessFile.xml"))
+		assert processTestDocument != null: "Process test file missing"
 
-        ServiceExtractor extractor = new ServiceExtractor()
+		ServiceExtractor extractor = new ServiceExtractor()
 
-        when: "Create Meta Model"
-        def processSteps = extractor.extractSteps(processTestDocument)
+		when: "Create Meta Model"
+		def processSteps = extractor.extractSteps(processTestDocument)
 
-        then: "Process Steps are identified"
-        assert processSteps.size().equals(1)
-        assert processSteps.get(0).stepLabel().equals("Service Step")
-    }
+		then: "Process Steps are identified"
+		assert processSteps.size().equals(1)
+		assert processSteps.get(0).stepLabel().equals("Service Step")
+	}
 }

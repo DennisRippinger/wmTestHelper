@@ -42,7 +42,7 @@ public class CLIEntry {
 					testHelper.generateTestHelper(parameter);
 				} else {
 					log.error("Parameters are not sufficient, exiting. " +
-							"WMPRT folder, output folder and namespace must be set.");
+						"WMPRT folder, output folder and namespace must be set.");
 				}
 			}
 

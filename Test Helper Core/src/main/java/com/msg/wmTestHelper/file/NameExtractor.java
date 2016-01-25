@@ -37,9 +37,9 @@ public class NameExtractor {
 		Validate.validIndex(varNameParts, 2);
 
 		result
-				.fileReference(processFile)
-				.version(getVersion(varNameParts))
-				.name(getName(varNameParts));
+			.fileReference(processFile)
+			.version(getVersion(varNameParts))
+			.name(getName(varNameParts));
 
 		return result;
 	}

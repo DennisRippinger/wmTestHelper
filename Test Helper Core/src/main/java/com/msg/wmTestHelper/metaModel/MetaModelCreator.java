@@ -61,7 +61,7 @@ public class MetaModelCreator {
 
 		for (AbstractExtractor extractor : extractors) {
 			processModel
-					.addProcessSteps(extractor.extractSteps(document));
+				.addProcessSteps(extractor.extractSteps(document));
 		}
 
 		return processModel;
