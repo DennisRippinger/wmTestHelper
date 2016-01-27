@@ -50,7 +50,11 @@ public class FileSearch {
 
 		for (File configFile : file.listFiles()) {
 			ProcessFile processFile = NameExtractor.extractProcessFile(configFile);
-			evaluateOldestVersion(processFile, tempResult);
+
+			if (processFile != null) {
+				evaluateOldestVersion(processFile, tempResult);
+			}
+
 		}
 
 		return tempResult.values();

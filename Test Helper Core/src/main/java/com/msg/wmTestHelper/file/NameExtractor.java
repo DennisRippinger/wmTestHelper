@@ -16,6 +16,7 @@
 package com.msg.wmTestHelper.file;
 
 import com.msg.wmTestHelper.pojo.ProcessFile;
+import com.msg.wmTestHelper.util.ProprietaryHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.Validate;
 
@@ -29,12 +30,22 @@ import java.io.File;
 @Slf4j
 public class NameExtractor {
 
+	private static String[] filterStrings;
+
+	static {
+		filterStrings = ProprietaryHelper.getConfig("files.filter").split(",");
+	}
+
 	public static ProcessFile extractProcessFile(File processFile) {
 		ProcessFile result = new ProcessFile();
 
 		String[] varNameParts = processFile.getName().split("[.]");
 
 		Validate.validIndex(varNameParts, 2);
+
+		if (isFiltered(varNameParts[2])) {
+			return null;
+		}
 
 		result
 			.fileReference(processFile)
@@ -56,5 +67,14 @@ public class NameExtractor {
 			i--;
 		}
 		return Integer.parseInt(mainPart.substring(i));
+	}
+
+	private static boolean isFiltered(String mainPart) {
+		for (String filter : filterStrings) {
+			if (mainPart.contains(filter)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

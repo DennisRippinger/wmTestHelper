@@ -15,6 +15,7 @@
  */
 package com.msg.wmTestHelper.file
 
+import com.msg.wmTestHelper.pojo.ProcessFile
 import spock.lang.Specification
 
 /**
@@ -50,6 +51,18 @@ class NameExtractorSpec extends Specification {
 		then: "Exception is thrown"
 		thrown(IndexOutOfBoundsException)
 
+	}
+
+	def "Filtered Filename is given"() {
+
+		setup: "Read in a filtered filename"
+		def wrongFile = new File("/A.B.__C2.Default.xml")
+
+		when: "Name extractor is called"
+		ProcessFile file = NameExtractor.extractProcessFile(wrongFile)
+
+		then: "Result is null"
+		assert file == null
 	}
 
 }
