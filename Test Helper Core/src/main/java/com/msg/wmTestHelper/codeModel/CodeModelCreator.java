@@ -22,7 +22,6 @@ import com.sun.codemodel.internal.JClassAlreadyExistsException;
 import com.sun.codemodel.internal.JCodeModel;
 import com.sun.codemodel.internal.JDefinedClass;
 import com.sun.codemodel.internal.JPackage;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 
@@ -60,16 +59,18 @@ public class CodeModelCreator {
 		generateClasses(codeModel, parameter);
 	}
 
-	@SneakyThrows(JClassAlreadyExistsException.class)
 	private void createSingleCodeFile(JCodeModel codeModel, ProcessModel processModel, GeneratorParameter parameter) {
 
-		JPackage jPackage = codeModel._package(parameter.baseNamespace());
-		JDefinedClass currentClass = jPackage._class(processModel.cropModelName());
+		try {
+			JPackage jPackage = codeModel._package(parameter.baseNamespace());
+			JDefinedClass currentClass = jPackage._class(processModel.cropModelName());
 
-		for (AbstractPartCreator partCreator : partCreators) {
-			partCreator.buildPart(codeModel, currentClass, processModel);
+			for (AbstractPartCreator partCreator : partCreators) {
+				partCreator.buildPart(codeModel, currentClass, processModel);
+			}
+		} catch (JClassAlreadyExistsException e) {
+			log.info("Could not create model for {}, it already exist", processModel.modelName());
 		}
-
 	}
 
 
