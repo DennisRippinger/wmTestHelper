@@ -90,8 +90,6 @@ public class WaitStepExtractor extends AbstractExtractor {
 
 		String docName = extractPlainValue(publishedDoc, "docName");
 
-		log.info(docName);
-
 		return StringUtils.isNotEmpty(docName) && (
 			StringUtils.equals(ProprietaryHelper.getConfig("wait.1.startmessage"), docName) ||
 				StringUtils.equals(ProprietaryHelper.getConfig("wait.2.startmessage"), docName) ||
