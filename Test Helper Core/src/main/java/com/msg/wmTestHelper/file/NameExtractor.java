@@ -18,9 +18,12 @@ package com.msg.wmTestHelper.file;
 import com.msg.wmTestHelper.pojo.ProcessFile;
 import com.msg.wmTestHelper.util.ProprietaryHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * NameExtractor
@@ -30,10 +33,13 @@ import java.io.File;
 @Slf4j
 public class NameExtractor {
 
-	private static String[] filterStrings;
+	private static List<String> filterStrings;
 
 	static {
-		filterStrings = ProprietaryHelper.getConfig("files.filter").split(",");
+		filterStrings = Arrays.asList(ProprietaryHelper.getConfig("files.filter").split(","));
+		if (StringUtils.isNotEmpty(ProprietaryHelper.getAdditionalFilterString())) {
+			filterStrings.addAll(Arrays.asList(ProprietaryHelper.getAdditionalFilterString().split(",")));
+		}
 	}
 
 	public static ProcessFile extractProcessFile(File processFile) {

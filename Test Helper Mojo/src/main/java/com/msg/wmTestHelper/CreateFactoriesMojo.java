@@ -16,6 +16,7 @@
 package com.msg.wmTestHelper;
 
 import com.msg.wmTestHelper.pojo.GeneratorParameter;
+import com.msg.wmTestHelper.util.ProprietaryHelper;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -37,8 +38,13 @@ public class CreateFactoriesMojo extends AbstractMojo {
 	@Parameter(property = "createFactories.baseNamespace", defaultValue = "", required = true)
 	private String baseNamespace;
 
+	@Parameter(property = "createFactories.filterString", defaultValue = "", required = false)
+	private String filterStrings;
+
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
+
+		ProprietaryHelper.setAdditionalFilterString(filterStrings);
 
 		GeneratorParameter parameter = new GeneratorParameter()
 			.wmprtPath(wmprtPath)

@@ -16,7 +16,9 @@
 package com.msg.wmTestHelper.util;
 
 import com.msg.wmTestHelper.exception.TestHelperException;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -32,6 +34,10 @@ import org.apache.commons.lang3.StringUtils;
 public final class ProprietaryHelper {
 
 	private static CompositeConfiguration config = new CompositeConfiguration();
+
+	@Getter
+	@Setter
+	private static String additionalFilterString;
 
 	static {
 		try {

@@ -16,6 +16,7 @@
 package com.msg.wmTestHelper;
 
 import com.msg.wmTestHelper.pojo.GeneratorParameter;
+import com.msg.wmTestHelper.util.ProprietaryHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.*;
 
@@ -56,6 +57,7 @@ public class CLIEntry {
 		parameter.wmprtPath(cmd.getOptionValue("w"));
 		parameter.outputPath(cmd.getOptionValue("o", "")); // Default is current folder.
 		parameter.baseNamespace(cmd.getOptionValue("n", "com.msg"));
+		ProprietaryHelper.setAdditionalFilterString(cmd.getOptionValue("f", ""));
 
 		return parameter;
 	}
@@ -71,6 +73,7 @@ public class CLIEntry {
 		options.addOption("w", "wmprt", true, "Path to WMPRT folder");
 		options.addOption("o", "output", true, "Output Folder for generated code");
 		options.addOption("n", "namespace", true, "The desired namespace for the generated code");
+		options.addOption("f", "filter", true, "Additional filter criteria on Process Definition files, separated by comma");
 
 		return options;
 	}
