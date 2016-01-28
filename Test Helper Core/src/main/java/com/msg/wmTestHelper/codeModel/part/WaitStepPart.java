@@ -65,6 +65,8 @@ public class WaitStepPart extends AbstractPartCreator {
 			}
 		}
 
+		log.warn("Could not evaluate type of wait step");
+
 		return StringUtils.EMPTY;
 	}
 }
