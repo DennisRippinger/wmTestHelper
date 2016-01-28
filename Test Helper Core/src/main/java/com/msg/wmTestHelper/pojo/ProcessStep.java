@@ -15,6 +15,7 @@
  */
 package com.msg.wmTestHelper.pojo;
 
+import com.msg.wmTestHelper.util.ProprietaryHelper;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.StringUtils;
@@ -55,9 +56,24 @@ public class ProcessStep {
 	 */
 	public String cropStepLabel() {
 		if (StringUtils.isNotEmpty(stepLabel)) {
-			return stepLabel.split(" ")[0];
+			String[] strings = stepLabel.split(" ");
+			String literal = strings[0];
+			if (isTechnicalName(literal)) {
+				return literal;
+			} else {
+				// There is no rule without exception :(
+				for (String otherLiteral : strings) {
+					if (isTechnicalName(otherLiteral)) {
+						return otherLiteral;
+					}
+				}
+			}
 		}
 
 		return StringUtils.EMPTY;
+	}
+
+	private boolean isTechnicalName(String literal) {
+		return literal.matches(ProprietaryHelper.getConfig("regex.technicalName"));
 	}
 }
