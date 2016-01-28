@@ -48,7 +48,7 @@ public class WaitStepPart extends AbstractPartCreator {
 
 		String typeOfWaitStep = evaluateTypeOfWaitStep(processStep);
 
-		JMethod method = currentClass.method(JMod.PUBLIC | JMod.STATIC, processStepBuilder, "createService" + processStep.cropStepLabel());
+		JMethod method = currentClass.method(JMod.PUBLIC | JMod.STATIC, processStepBuilder, "createWaitStep" + processStep.cropStepLabel());
 		method.body()._return(JExpr._new(processStepBuilder).arg(processStep.stepLabel()).arg(waitStepEnum.staticRef(typeOfWaitStep)));
 	}
 
