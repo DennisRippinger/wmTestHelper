@@ -44,6 +44,8 @@ public class CreateFactoriesMojo extends AbstractMojo {
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 
+		Banner.printBanner();
+
 		ProprietaryHelper.setAdditionalFilterString(filterStrings);
 
 		GeneratorParameter parameter = new GeneratorParameter()
